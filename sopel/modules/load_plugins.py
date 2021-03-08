@@ -1,3 +1,16 @@
+"""
+Sopel Database Plugin Loading Module
+
+Copyright Liam 2021 All rights reserved.
+
+This module provides the following:
+ >  <Placeholder>
+
+This module depends on:
+ >  <Placeholder>
+ 
+"""
+
 from sopel import module
 import mariadb
 from sopel import tools
@@ -8,7 +21,7 @@ class db:
             global conn
             global cur
             conn = mariadb.connect(
-                user="ScoutLink",
+                user="ScoutLink", #Maybe don't put that word on here (Cause if council see it)
                 password="N0T_H3R3!",
                 host="127.0.0.1",
                 port=3306,
