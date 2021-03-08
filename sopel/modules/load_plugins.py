@@ -21,7 +21,7 @@ class db:
             global conn
             global cur
             conn = mariadb.connect(
-                user="ScoutLink", #Maybe don't put that word on here (Cause if council see it)
+                user="Not_Here", #Maybe don't put that word on here (Cause if council see it)
                 password="N0T_H3R3!",
                 host="127.0.0.1",
                 port=3306,
