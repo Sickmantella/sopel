@@ -46,11 +46,10 @@ class db:
         cur.execute("SELECT Plugin_Name,Status FROM Enabled_Plugins")
         for (Plugin_Name,Status) in cur:
             if "Plugin Name: {Plugin_Name}, Status: {Status}" != "Plugin Name: , Status: ":
-                if Status == 1:
-                    Status = 'ON'
-                else:
-                    Status = 'OFF'
-                #bot.notice("Plugin Name: " + Plugin_Name + " | Status: " + str(Status), "Marco_Polo")
+                if Status == 0:
+                    #load the plugin here
+                    cur.execute("update Enabled_Plugins set status=1 where Plugin_Name='" + str(Plugin_Name) + "'")
+
     def get_plugins(bot, nick):
         global cur
         cur = conn.cursor()
