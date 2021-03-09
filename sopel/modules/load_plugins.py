@@ -11,32 +11,32 @@ This module depends on:
  
 """
 
-from sopel import module
-import mariadb
-from sopel import tools
+from sopel import module #Allows access to bot stuff
+import mariadb           #Allows access to the database of plugins
+from sopel import tools  #Allows access to more bot stuff
 
-class db:
-    def connect(bot):
-        try:
-            global conn
+class db:                #Defines the class db so you can do db.*()
+    def connect(bot):    #Defines a connection to the bot
+        try:             #Trys to connect to the database
+            global conn  #Allows global access
             global cur
-            conn = mariadb.connect(
+            conn = mariadb.connect( #Defines the connection username, password ect.
                 user="Not_Here",
                 password="N0T_H3R3!",
                 host="127.0.0.1",
                 port=3306,
                 database="Not_Here"
             )
-            cur = conn.cursor()
-            conn.autocommit = True
-        except mariadb.Error as e:
-            bot.say(f"Error connecting to MariaDB Platform: {e}", "#tea-logs")
+            cur = conn.cursor()    #Defines cur
+            conn.autocommit = True #Allowa auto save
+        except mariadb.Error as e: #Caches any errors connecting to the database
+            bot.say(f"Error connecting to MariaDB Platform: {e}", "#tea-logs") #Puts the errors in the log channel of the bot
 
-    def add_plugin(bot, nick, Plugin_Name):
-        cur = conn.cursor()
-        try:
+    def add_plugin(bot, nick, Plugin_Name): #Defines adding a plugin
+        cur = conn.cursor() #Sets cur again
+        try: #Tries to insert data into the database
             cur.execute("INSERT INTO Enabled_Plugins (Plugin_Name, Status) VALUES ('" + str(Plugin_Name) + "', '0')")
-        except mariadb.Error as e:
+        except mariadb.Error as e: #Catcches errors and sends it to the bot log chan and user
             bot.notice(f"Error connecting to MariaDB Platform: {e}", sender_nick)
             bot.say(f"Error connecting to MariaDB Platform: {e}", "#tea-logs")        
         bot.notice("Unless any errors are seen it *SHOULD* have worked. Please check by typing '.dblist' (no quotes) and checking if the user has been added.", nick)
